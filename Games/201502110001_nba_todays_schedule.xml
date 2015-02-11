@@ -1,0 +1,10 @@
+<Msg_file LeagueID="00" League="NBA" Season="2014-15" SeasonType="Regular Season">
+  <Game Number="0">
+	<Msg_game_info>
+		<Game_info Game_id="111111130" Game_date="02/11/2015" Game_time="10:30 AM" Home_time="10:30 AM" Visitor_time="10:30 AM" Arena_name="Forbes Road Pavilion" Location="Braintree, MA" PPD_Status="I" Game_date_UTC="2015-02-11" Game_time_UTC="15:30" />
+		<Home_team Team_id="7818498118" Team_city="Braintree" Team_name="Quality" Team_abr="WA_HOME" />
+		<Visitor_team Team_id="7818498119" Team_city="" Team_name="Assurance" Team_abr="WA_AWAY" />
+		<TV_Info Home="NA_QA" Away="NA_QA2" Natnl="NA_QA3" Canadian="NA_QA4" />
+	</Msg_game_info>
+  </Game>
+</Msg_file>
