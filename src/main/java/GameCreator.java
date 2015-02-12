@@ -11,6 +11,7 @@ import org.apache.commons.net.ftp.FTPSClient;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.testng.Assert;
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
@@ -21,11 +22,17 @@ import java.security.NoSuchAlgorithmException;
 public class GameCreator {
 
     private String gameName;
-    private File outputDir = new File("..\\Games\\");
+    private File outputDir;
     private File gameFile;
     private FileWriter fileWriter = null;
-    private DataBase dataBase=new DataBase();
-    private String gameID=Loader.loadProperty("gameID");
+    private DataBase dataBase;
+    private String gameID;
+
+    public GameCreator(){
+        outputDir = new File("..\\Games\\");
+        dataBase=new DataBase();
+        gameID=Loader.loadProperty("gameID");
+    }
 
     public void createGame() {
         gameID=dataBase.getGameID(gameID);
@@ -42,7 +49,6 @@ public class GameCreator {
                 "\t</Msg_game_info>\n" +
                 "  </Game>\n" +
                 "</Msg_file>");
-        Loader.updateProperty("gameID",gameID);
     }
 
     private void writeToFile(String text) {
@@ -94,6 +100,19 @@ public class GameCreator {
         }catch (IOException e){
             e.printStackTrace();
             throw new RuntimeException("ERROR! Can't download Game file to SFTP.");
+        }
+    }
+
+    public void updateProperty(){
+        Loader.updateProperty("gameID",gameID);
+        String date=takeCurrentDate("YYYY-MM-dd");
+        Loader.updateProperty("date",date);
+        try{
+            Assert.assertEquals(Loader.loadProperty("gameID"),gameID);
+            Assert.assertEquals(Loader.loadProperty("date"),date);
+        }catch (AssertionError e){
+            e.printStackTrace();
+            throw new RuntimeException("ERROR! NBA Properties was not updated");
         }
     }
 

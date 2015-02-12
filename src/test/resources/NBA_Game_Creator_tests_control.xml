@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="NBA Game Creator Tests" verbose="10" data-provider-thread-count="1">
+
+    <test name="Game Creator" preserve-order="true">
+        <classes >
+            <class name="GameCreationTest" >
+                <methods>
+                    <include name="creatGameTest"/>
+                    <include name="downloadToFTPTest"/>
+                    <include name="updatePropertiesTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

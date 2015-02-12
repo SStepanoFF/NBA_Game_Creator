@@ -70,7 +70,7 @@
                 <version>2.18.1</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/NBA_tests_control.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/NBA_Game_Creator_tests_control.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>

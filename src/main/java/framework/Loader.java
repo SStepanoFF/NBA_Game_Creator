@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.Properties;
 
 public class Loader {
-    private static final String propPath ="D:\\MY\\Automation\\NBA_Project\\NBA\\src\\main\\resources\\NBA.properties";      //"D:/MY/Automation/NBA_Project/NBA.properties";
+    private static final String propPath ="D:\\MY\\Automation\\NBA_Project\\NBA\\src\\main\\resources\\NBA.properties";      //"../../../NBA/src/main/resourcesNBA.properties";
     private static Properties proper = new Properties();
     private static File propFile = new File(propPath);
     static FileWriter fileWriter = null;
