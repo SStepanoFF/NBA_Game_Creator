@@ -22,17 +22,11 @@ import java.security.NoSuchAlgorithmException;
 public class GameCreator {
 
     private String gameName;
-    private File outputDir;
+    private File outputDir= new File("../Games/"); //System.getProperty("user.dir")+
     private File gameFile;
     private FileWriter fileWriter = null;
-    private DataBase dataBase;
-    private String gameID;
-
-    public GameCreator(){
-        outputDir = new File("..\\Games\\");
-        dataBase=new DataBase();
-        gameID=Loader.loadProperty("gameID");
-    }
+    private DataBase dataBase=new DataBase();
+    private String gameID=Loader.loadProperty("gameID");
 
     public void createGame() {
         gameID=dataBase.getGameID(gameID);

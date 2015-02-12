@@ -7,8 +7,8 @@
             <class name="GameCreationTest" >
                 <methods>
                     <include name="creatGameTest"/>
-                    <include name="downloadToFTPTest"/>
-                    <include name="updatePropertiesTest"/>
+                    <!--<include name="downloadToFTPTest"/>-->
+                    <!--<include name="updatePropertiesTest"/>-->
                 </methods>
             </class>
         </classes>
