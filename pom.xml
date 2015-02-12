@@ -57,7 +57,7 @@
         <dependency>
             <groupId>net.schmizz</groupId> <!--sftp connect-->
             <artifactId>sshj</artifactId>
-            <version>0.4.0</version>
+            <version>0.10.0</version>
         </dependency>
     </dependencies>
 

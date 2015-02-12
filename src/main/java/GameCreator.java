@@ -3,6 +3,9 @@ import framework.Loader;
 import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.sftp.SFTPClient;
 import net.schmizz.sshj.xfer.FileSystemFile;
+import net.schmizz.sshj.xfer.LocalSourceFile;
+import net.schmizz.sshj.xfer.scp.SCPDownloadClient;
+import net.schmizz.sshj.xfer.scp.SCPFileTransfer;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPSClient;
 import org.joda.time.DateTime;
@@ -77,13 +80,14 @@ public class GameCreator {
     }
 
     public void downloadGameToSFTP() {
-        SSHClient sshClient = new SSHClient();
+        final SSHClient sshClient = new SSHClient();
         try {
-            sshClient.loadKnownHosts();
-            sshClient.connect("sftp.keysurvey.com");
-            sshClient.authPassword("nbaс", "Hd8kfc4xzx");
-            SFTPClient sftpClient=sshClient.newSFTPClient();
-            sftpClient.put(new FileSystemFile(gameFile),"/test");
+            sshClient.addHostKeyVerifier("9b:f1:0d:f0:1c:39:8d:0e:fc:c7:7f:45:7a:25:0e:2d");
+            sshClient.connect("sftp.keysurvey.com",22);
+            sshClient.authPassword("nba", "Hd8kfc4xzx");
+
+            final SFTPClient sftpClient = sshClient.newSFTPClient();
+            sftpClient.put(gameFile.getPath(),"/test");
             sftpClient.close();
             sshClient.disconnect();
         }catch (IOException e){
