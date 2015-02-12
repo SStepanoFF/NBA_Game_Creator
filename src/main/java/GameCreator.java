@@ -1,12 +1,16 @@
 import framework.DataBase;
 import framework.Loader;
+import net.schmizz.sshj.SSHClient;
+import net.schmizz.sshj.sftp.SFTPClient;
+import net.schmizz.sshj.xfer.FileSystemFile;
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPSClient;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by sergii.stepanov on 11.02.2015.
@@ -15,15 +19,15 @@ public class GameCreator {
 
     private String gameName;
     private File outputDir = new File("..\\Games\\");
-    private File game;
+    private File gameFile;
     private FileWriter fileWriter = null;
     private DataBase dataBase=new DataBase();
     private String gameID=Loader.loadProperty("gameID");
 
     public void createGame() {
         gameID=dataBase.getGameID(gameID);
-        String gameName=takeCurrentDate("YYYMMdd")+"0001_nba_todays_schedule";
-        game = new File(outputDir, gameName+".xml");
+        gameName=takeCurrentDate("YYYMMdd")+"0001_nba_todays_schedule";
+        gameFile = new File(outputDir, gameName+".xml");
         writeToFile("<Msg_file LeagueID=\"00\" League=\"NBA\" Season=\"2014-15\" SeasonType=\"Regular Season\">\n" +
                 "  <Game Number=\"0\">\n" +
                 "\t<Msg_game_info>\n" +
@@ -39,7 +43,7 @@ public class GameCreator {
 
     private void writeToFile(String text) {
         try {
-            fileWriter = new FileWriter(game);
+            fileWriter = new FileWriter(gameFile);
             fileWriter.append(text + "\n");
         } catch (IOException e) {
             e.printStackTrace();
@@ -71,4 +75,43 @@ public class GameCreator {
             }
         }
     }
+
+    public void downloadGameToSFTP() {
+        SSHClient sshClient = new SSHClient();
+        try {
+            sshClient.loadKnownHosts();
+            sshClient.connect("sftp.keysurvey.com");
+            sshClient.authPassword("nbaс", "Hd8kfc4xzx");
+            SFTPClient sftpClient=sshClient.newSFTPClient();
+            sftpClient.put(new FileSystemFile(gameFile),"/test");
+            sftpClient.close();
+            sshClient.disconnect();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+//    public void downloadGameToFTP() throws NoSuchAlgorithmException {
+//        FTPClient ftpClient = new FTPClient();
+//        FileInputStream fileInputStream = null;
+//        try {
+//            ftpClient.connect("sftp.keysurvey.com");
+//            ftpClient.login("nbaс", "Hd8kfc4xzx");
+//            //ftpClient.changeWorkingDirectory("/test");
+//            fileInputStream= new FileInputStream(gameFile);
+//            ftpClient.storeFile("/test/201502120001_nba_todays_schedule.xml",fileInputStream);
+//            ftpClient.logout();
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }finally {
+//            try {
+//                if (fileInputStream != null) {
+//                    fileInputStream.close();
+//                }
+//                ftpClient.disconnect();
+//            }catch (IOException e){
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 }

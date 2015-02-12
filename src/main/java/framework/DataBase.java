@@ -27,11 +27,11 @@ public class DataBase {
         try{
             statement = conn.createStatement();//Готовим запрос
             while (!result.contains("0")) {
-                gameID=Integer.toString(Integer.parseInt(gameID) + 1);
                 resultSets = statement.executeQuery("SELECT count(*) as C FROM GAMES WHERE EXTERNAL_ID=" + gameID);
                 while (resultSets.next()) {
                     result = resultSets.getString("C");
                 }
+                if(!result.contains("0")) gameID=Integer.toString(Integer.parseInt(gameID) + 1);
             }
             return gameID;
         } catch(Exception e){

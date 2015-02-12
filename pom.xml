@@ -49,7 +49,16 @@
             <artifactId>commons-configuration</artifactId>
             <version>1.6</version>
         </dependency>
-
+        <dependency>
+            <groupId>commons-net</groupId>      <!--ftp connect-->
+            <artifactId>commons-net</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.schmizz</groupId> <!--sftp connect-->
+            <artifactId>sshj</artifactId>
+            <version>0.4.0</version>
+        </dependency>
     </dependencies>
 
     <build>

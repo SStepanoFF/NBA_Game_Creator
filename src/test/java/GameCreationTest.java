@@ -1,6 +1,8 @@
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.security.NoSuchAlgorithmException;
+
 /**
  * Created by sergii.stepanov on 11.02.2015.
  */
@@ -15,5 +17,10 @@ public class GameCreationTest {
     @Test
     private void creatGame(){
         gameCreator.createGame();
+    }
+
+    @Test
+    private void downloadToFTPTest() throws NoSuchAlgorithmException {
+        gameCreator.downloadGameToSFTP();
     }
 }
