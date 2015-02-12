@@ -29,6 +29,7 @@ public class GameCreator {
 
     public void createGame() {
         gameID=dataBase.getGameID(gameID);
+        if (gameID.contains("Err")){throw new RuntimeException("ERROR! Can't create Game file.");}
         gameName=takeCurrentDate("YYYMMdd")+"0001_nba_todays_schedule";
         gameFile = new File(outputDir, gameName+".xml");
         writeToFile("<Msg_file LeagueID=\"00\" League=\"NBA\" Season=\"2014-15\" SeasonType=\"Regular Season\">\n" +
@@ -50,6 +51,7 @@ public class GameCreator {
             fileWriter.append(text + "\n");
         } catch (IOException e) {
             e.printStackTrace();
+            throw new RuntimeException("ERROR! Can't write to Game file.");
         } finally {
             if (fileWriter != null) {
                 try {
@@ -70,13 +72,13 @@ public class GameCreator {
     private void findGameID(){
         gameID=Integer.toString(Integer.parseInt(gameID)+1);
         boolean findGameId=false;
-        while (!findGameId){
-            if (dataBase.getGameID(gameID)==null) {
-                findGameId = true;
-            }else {
-                gameID=Integer.toString(Integer.parseInt(gameID)+1);
+            while (!findGameId) {
+                if (dataBase.getGameID(gameID) == null) {
+                    findGameId = true;
+                } else {
+                    gameID = Integer.toString(Integer.parseInt(gameID) + 1);
+                }
             }
-        }
     }
 
     public void downloadGameToSFTP() {
@@ -85,13 +87,13 @@ public class GameCreator {
             sshClient.addHostKeyVerifier("9b:f1:0d:f0:1c:39:8d:0e:fc:c7:7f:45:7a:25:0e:2d");
             sshClient.connect("sftp.keysurvey.com",22);
             sshClient.authPassword("nba", "Hd8kfc4xzx");
-
             final SFTPClient sftpClient = sshClient.newSFTPClient();
-            sftpClient.put(gameFile.getPath(),"/test");
+            sftpClient.put(gameFile.getPath(),"/test/");
             sftpClient.close();
             sshClient.disconnect();
         }catch (IOException e){
             e.printStackTrace();
+            throw new RuntimeException("ERROR! Can't download Game file to SFTP.");
         }
     }
 

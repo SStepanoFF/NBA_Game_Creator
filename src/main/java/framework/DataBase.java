@@ -18,7 +18,7 @@ public class DataBase {
         }
         catch(Exception e){
             e.printStackTrace();
-            Loader.logWritter("ERROR! Can't connect to DB");
+           // Loader.logWritter("ERROR! Can't connect to DB");
         }
     }
 
@@ -36,7 +36,8 @@ public class DataBase {
             return gameID;
         } catch(Exception e){
             e.printStackTrace();
-            return result="Error";
+            throw new RuntimeException("ERROR! Can't write to Game file.");
+            //return result="Error";
         }
         finally{
             try {
@@ -45,6 +46,7 @@ public class DataBase {
                 conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+                throw new RuntimeException("ERROR! Can't write to Game file.");
             }
         }
     }

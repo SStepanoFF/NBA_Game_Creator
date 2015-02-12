@@ -39,31 +39,4 @@ public class Loader {
         }
     }
 
-   public static void logWritter(String text) {
-//        try {
-//            fileWriter = new FileWriter(resultFile, true);
-//            fileWriter.append(text + "\n");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (fileWriter != null) {
-//                try {
-//                    fileWriter.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-    }
-
-//    public static void clearResultFile(){
-//        try{
-//            fileWriter=new FileWriter(resultFile);
-//            fileWriter.write("");
-//            fileWriter.close();
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        }
-//    }
-
 }
