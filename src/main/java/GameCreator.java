@@ -33,15 +33,15 @@ public class GameCreator {
         if (gameID.contains("Err")){throw new RuntimeException("ERROR! Can't create Game file.");}
         gameName=takeCurrentDate("YYYMMdd")+"0001_nba_todays_schedule";
         gameFile = new File(outputDir, gameName+".xml");
-        writeToFile("<Msg_file LeagueID=\"00\" League=\"NBA\" Season=\"2014-15\" SeasonType=\"Regular Season\">\n" +
-                "  <Game Number=\"0\">\n" +
+        writeToFile("<Msg_file LeagueID=\"00\" League=\"NBA\" Season=\"2014-15\" SeasonType=\"Regular Season\">\r\n" +
+                "  <Game Number=\"0\">\r\n" +
                 "\t<Msg_game_info>\r\n" +
-                "\t\t<Game_info Game_id=\""+ gameID+"\" Game_date=\""+takeCurrentDate("MM/dd/YYYY")+"\" Game_time=\"15:30 AM\" Home_time=\"15:30 AM\" Visitor_time=\"15:30 AM\" Arena_name=\"Forbes Road Pavilion\" Location=\"Braintree, MA\" PPD_Status=\"I\" Game_date_UTC=\""+takeCurrentDate("YYYY-MM-dd")+"\" Game_time_UTC=\"20:30\" />\n" +
-                "\t\t<Home_team Team_id=\"7818498118\" Team_city=\"Braintree\" Team_name=\"Quality\" Team_abr=\"WA_HOME\" />\n" +
-                "\t\t<Visitor_team Team_id=\"7818498119\" Team_city=\"\" Team_name=\"Assurance\" Team_abr=\"WA_AWAY\" />\n" +
-                "\t\t<TV_Info Home=\"NA_QA\" Away=\"NA_QA2\" Natnl=\"NA_QA3\" Canadian=\"NA_QA4\" />\n" +
-                "\t</Msg_game_info>\n" +
-                "  </Game>\n" +
+                "\t\t<Game_info Game_id=\""+ gameID+"\" Game_date=\""+takeCurrentDate("MM/dd/YYYY")+"\" Game_time=\"15:30 AM\" Home_time=\"15:30 AM\" Visitor_time=\"15:30 AM\" Arena_name=\"Forbes Road Pavilion\" Location=\"Braintree, MA\" PPD_Status=\"I\" Game_date_UTC=\""+takeCurrentDate("YYYY-MM-dd")+"\" Game_time_UTC=\"20:30\" />\r\n" +
+                "\t\t<Home_team Team_id=\"7818498118\" Team_city=\"Braintree\" Team_name=\"Quality\" Team_abr=\"WA_HOME\" />\r\n" +
+                "\t\t<Visitor_team Team_id=\"7818498119\" Team_city=\"\" Team_name=\"Assurance\" Team_abr=\"WA_AWAY\" />\r\n" +
+                "\t\t<TV_Info Home=\"NA_QA\" Away=\"NA_QA2\" Natnl=\"NA_QA3\" Canadian=\"NA_QA4\" />\r\n" +
+                "\t</Msg_game_info>\r\n" +
+                "  </Game>\r\n" +
                 "</Msg_file>");
     }
 
