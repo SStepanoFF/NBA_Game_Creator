@@ -15,13 +15,18 @@ public class GameCreationTest {
     }
 
     @Test
-    private void creatGameTest(){
+    private void createGameTest(){
         gameCreator.createGame();
     }
 
     @Test
-    private void downloadToFTPTest() throws NoSuchAlgorithmException {
-        gameCreator.downloadGameToSFTP();
+    private void downloadTestGameToFTPTest() throws NoSuchAlgorithmException {
+        gameCreator.downloadTestGameToSFTP();
+    }
+
+    @Test
+    private void downloadProdGameToFTPTest() throws NoSuchAlgorithmException {
+        gameCreator.downloadProdGameToSFTP();
     }
 
     @Test

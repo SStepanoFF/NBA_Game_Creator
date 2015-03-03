@@ -6,9 +6,10 @@
         <classes >
             <class name="GameCreationTest" >
                 <methods>
-                    <include name="creatGameTest"/>
-                    <!--<include name="downloadToFTPTest"/>-->
-                    <!--<include name="updatePropertiesTest"/>-->
+                    <include name="createGameTest"/>
+                    <include name="downloadTestGameToFTPTest"/>
+                    <include name="downloadProdGameToFTPTest"/>
+                    <include name="updatePropertiesTest"/>
                 </methods>
             </class>
         </classes>
