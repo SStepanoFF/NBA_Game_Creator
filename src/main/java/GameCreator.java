@@ -15,6 +15,12 @@ import org.testng.Assert;
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by sergii.stepanov on 11.02.2015.
@@ -27,8 +33,12 @@ public class GameCreator {
     private FileWriter fileWriter = null;
     private DataBase dataBase=new DataBase();
     private String gameID=Loader.loadProperty("gameID");
+    private String game_time="11:37";
+//    private DateTime game_time=new DateTime("HH:mm");
+
 
     public void createGame() {
+        String UTC_time=Integer.toString(Integer.parseInt(game_time.substring(0,2))+5)+game_time.substring(2,5);
         gameID=dataBase.getGameID(gameID);
         if (gameID.contains("Err")){throw new RuntimeException("ERROR! Can't create Game file.");}
         gameName=takeCurrentDate("YYYMMdd")+"0001_nba_todays_schedule";
@@ -36,7 +46,7 @@ public class GameCreator {
         writeToFile("<Msg_file LeagueID=\"00\" League=\"NBA\" Season=\"2014-15\" SeasonType=\"Regular Season\">\r\n" +
                 "  <Game Number=\"0\">\r\n" +
                 "\t<Msg_game_info>\r\n" +
-                "\t\t<Game_info Game_id=\""+ gameID+"\" Game_date=\""+takeCurrentDate("MM/dd/YYYY")+"\" Game_time=\"15:30 AM\" Home_time=\"15:30 AM\" Visitor_time=\"15:30 AM\" Arena_name=\"Forbes Road Pavilion\" Location=\"Braintree, MA\" PPD_Status=\"I\" Game_date_UTC=\""+takeCurrentDate("YYYY-MM-dd")+"\" Game_time_UTC=\"20:30\" />\r\n" +
+                "\t\t<Game_info Game_id=\""+ gameID+"\" Game_date=\""+takeCurrentDate("MM/dd/YYYY")+"\" Game_time=\""+game_time+" AM\" Home_time=\""+game_time+" AM\" Visitor_time=\""+game_time+" AM\" Arena_name=\"Forbes Road Pavilion\" Location=\"Braintree, MA\" PPD_Status=\"I\" Game_date_UTC=\""+takeCurrentDate("YYYY-MM-dd")+"\" Game_time_UTC=\""+UTC_time+"\" />\r\n" +
                 "\t\t<Home_team Team_id=\"7818498118\" Team_city=\"Braintree\" Team_name=\"Quality\" Team_abr=\"WA_HOME\" />\r\n" +
                 "\t\t<Visitor_team Team_id=\"7818498119\" Team_city=\"\" Team_name=\"Assurance\" Team_abr=\"WA_AWAY\" />\r\n" +
                 "\t\t<TV_Info Home=\"NA_QA\" Away=\"NA_QA2\" Natnl=\"NA_QA3\" Canadian=\"NA_QA4\" />\r\n" +
@@ -67,6 +77,15 @@ public class GameCreator {
         DateTime dt = new DateTime();
         DateTimeFormatter dateFormat = DateTimeFormat.forPattern(formatDate);
         return dateFormat.print(dt);
+    }
+
+    public Date dataConvertfromString(String text) {
+        Date date=null;
+        try{
+            SimpleDateFormat format=new SimpleDateFormat("HH:mm", Locale.UK);
+            date=format.parse(text);
+        }catch (ParseException e){}
+        return date;
     }
 
     private void findGameID(){
