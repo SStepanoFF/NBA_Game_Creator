@@ -113,7 +113,7 @@ public class GameCreator {
         try {
             sshClient.addHostKeyVerifier("9b:f1:0d:f0:1c:39:8d:0e:fc:c7:7f:45:7a:25:0e:2d");
             sshClient.connect("sftp.keysurvey.com",22);
-            sshClient.authPassword("nba", "Hd8kfc4xzx");
+            sshClient.authPassword(login", "pass");
             final SFTPClient sftpClient = sshClient.newSFTPClient();
             sftpClient.put(gameFile.getPath(),destination);
             sftpClient.close();
