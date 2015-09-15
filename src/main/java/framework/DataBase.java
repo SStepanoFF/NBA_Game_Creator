@@ -12,7 +12,7 @@ public class DataBase {
         try {
             Class.forName("com.mysql.jdbc.Driver");//Регистрируем драйвер
             conn = DriverManager.getConnection("jdbc:mysql://mysql-kstest2.t1.tenet:3306/nba_t1_ssstest_com_PRR_3227",
-                    "member", "1234");//Установка соединения с БД
+                    "login", "pass");//Установка соединения с БД
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
